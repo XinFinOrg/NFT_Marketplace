@@ -2,6 +2,7 @@ import React from 'react';
 import { observer } from 'mobx-react';
 import { Modal, Button, FormGroup, Col, Input, Row } from 'reactstrap';
 import app from '../../../app';
+import { buyItem } from '../../../utils/helpers/xdc3';
 
 
 const BuyModal = observer((): JSX.Element => {
@@ -55,7 +56,7 @@ const BuyModal = observer((): JSX.Element => {
           className="btn-round"
           type="button"
           onClick={() => {
-            app.xdc3.buyFixedPriceNFT();
+            buyItem();
           }}
         >
           Proceed to Payment

@@ -41,20 +41,33 @@ export class ConstantsStore implements IConstantsStore {
     this.isOpen = false;
   }
 
+  @action closeConfirmationModal(): void {
+    this.closeModal();
+  }
+
   @action openModal(modalToOpen: string): void {
     this.modalToShow = modalToOpen;
     this.isOpen = true;
   }
 
   @computed truncateAddress = (addressToTruncate: string): string => {
-    if (addressToTruncate) {
-      const part1: string = addressToTruncate.substr(0, 6);
-      const part2: string = addressToTruncate.slice(-6);
+    const addressTemp: string = this._convertToXDCAddress(addressToTruncate);
+    if (addressTemp) {
+      const part1: string = addressTemp.substr(0, 6);
+      const part2: string = addressTemp.slice(-6);
       const truncatedAddress = `${part1}......${part2}`;
       return truncatedAddress;
     } else {
       return '';
     }
   }
-
+  _convertToXDCAddress(addressToConvert: string): string {
+    let addressToReturn = addressToConvert;
+    if (app.xdc3.isXinPay) {
+      const length: number = addressToConvert.length;
+      const addressPart2: string = addressToConvert.substr(2, length);
+      addressToReturn = `xdc${addressPart2}`
+    }
+    return addressToReturn;
+  }
 }

@@ -23,7 +23,7 @@ const ConfirmationModal = (): JSX.Element => {
           className="btn-round"
           type="button"
           onClick={() => {
-            app.vars.closeModal();
+            app.vars.closeConfirmationModal();
           }}
         >
           Continue

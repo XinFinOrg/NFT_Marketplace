@@ -24,7 +24,7 @@ export class NFTStore implements INFTStore {
   }
 
   @action async loadAllNFTs(): Promise<void> {
-    console.log('loadAllNFTs');
+ //   console.log('loadAllNFTs');
     this.allNFTs = [];
     if (app.xdc3.isConnected()) {
       this.lastTokenMinted = await getLastTokenIdMinted();
@@ -42,7 +42,9 @@ export class NFTStore implements INFTStore {
       }
     }
   }
-
+  @action setLastTokenLoaded(value: number): void {
+    this.lastTokenLoaded = value;
+  }
   @action async loadNextToken(tokenIdToLoad: number): Promise<void> {
     const token = await this._getNFTFomTokenId(tokenIdToLoad);
     this.allNFTs.push(token);

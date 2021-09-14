@@ -3,12 +3,15 @@ import React from "react";
 import app from "../../../app";
 import { useLocation, Link } from 'react-router-dom';
 import Logo from "../../../assets/img/xinfinlogo.png";
+import DisConnectWalletComponent from "../../../components/disconnect-wallet/DisconnectWallet";
+import { observer } from "mobx-react";
 
-export const Sidebar = (): JSX.Element => {
+export const Sidebar = observer((): JSX.Element => {
   const usePathName = () => {
     const location = useLocation();
     return location.pathname;
   };
+
 
 
   const getActiveClass = (valueToCheck: string) => {
@@ -37,8 +40,14 @@ export const Sidebar = (): JSX.Element => {
     </Link>
   </li>;
 
+
+
   const getCreateButton = (): JSX.Element => {
     return app.xdc3.address.length > 0 ? createButton : <></>;
+  };
+
+  const getDisconnectButton = (): JSX.Element => {
+     return app.xdc3.address.length > 0 ? <DisConnectWalletComponent></DisConnectWalletComponent> : <></>;
   };
 
 
@@ -75,6 +84,8 @@ export const Sidebar = (): JSX.Element => {
             </Link>
           </li>
           {getCreateButton()}
+
+          {getDisconnectButton()}
 
           <li className="nav-item mt-3">
             <h6 className="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Other pages</h6>
@@ -117,4 +128,4 @@ export const Sidebar = (): JSX.Element => {
       </div>
     </aside>
   );
-};
+});

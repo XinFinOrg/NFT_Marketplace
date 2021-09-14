@@ -10,7 +10,7 @@ const Header = observer((): JSX.Element => {
   const onCopyText = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
     setIsCopied(true);
-    const walletAddress = `${app.xdc3.address}`;
+    const walletAddress = `${app.vars._convertToXDCAddress(app.xdc3.address)}`;
     const inputElement = document.createElement("input") as HTMLInputElement;
     inputElement.setAttribute("value", walletAddress);
     document.body.appendChild(inputElement);
@@ -33,7 +33,7 @@ const Header = observer((): JSX.Element => {
       <div id="address" onClick={(e) => handleCopyButtonClicked(e)}>
         <span className="wallet-addres">
           <i className="tim-icons icon-wallet-43" />
-          {app.xdc3?.address}
+          {app.vars._convertToXDCAddress(app.xdc3?.address)}
         </span>
         <div className="btn btn-primary copybtn">
           <img src={XDCIcon22} className="xdc-icon" alt="..." />
@@ -64,7 +64,6 @@ const Header = observer((): JSX.Element => {
           </div>
           <ul className="navbar-nav  justify-content-end">
             {getButton()}
-
           </ul>
         </div>
       </div>
