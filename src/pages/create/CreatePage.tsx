@@ -6,14 +6,17 @@ import app from "../../app";
 import Header from "../layout/header/Header";
 import SettingsBar from "./settings-bar/SettingsBar";
 import MainPanel from "./main-panel/MainPanel";
+import { useHistory } from "react-router-dom";
 
 export const CreatePage = (): JSX.Element => {
+  const history = useHistory();
 
 
-  const handleMintClicked = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleMintClicked = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    app.mint.mintNewNFT();
+    await app.mint.mintNewNFT();
     app.vars.openModal('confirmation');
+    history.push('/');
   };
 
 
